@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <string.h>
 #include <fcntl.h>
+#include <sys/wait.h>
 #include <readline/history.h>
 
 #include "Command.h"
@@ -32,6 +33,8 @@ static void builtin_args(CommandRep r, int n) {
 BIDEFN(exit) {
   builtin_args(r,0);
   *eof=1;
+  /* Wait for any running background jobs to finish before exiting */
+  while (wait(NULL) > 0);
 }
 
 BIDEFN(pwd) {

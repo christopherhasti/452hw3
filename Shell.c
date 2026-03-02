@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <signal.h>
 #include <termios.h>
+#include <sys/wait.h>
 #include <readline/readline.h>
 #include <readline/history.h>
 
@@ -26,6 +27,10 @@ int main() {
   }
   
   while (!eof) {
+    /* Reap any background processes that have finished to prevent zombies */
+    int status;
+    while (waitpid(-1, &status, WNOHANG) > 0);
+
     char *line=readline(prompt);
     if (!line)
       break;
