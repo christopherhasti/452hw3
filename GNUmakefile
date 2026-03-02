@@ -1,14 +1,11 @@
 prog=shell
+ldflags:=-lreadline -lhistory -lncurses
 
-ldflags:=-lreadline -lncurses
+# Update objects to compile your own deq.c
+objs:= $(patsubst %.c,%.o,$(wildcard *.c))
 
-include ../GNUmakefile
-
-try: $(objs) libdeq.so
-	gcc -o $@ $(objs) $(ldflags) -L. -ldeq -Wl,-rpath=.
-
-trytest: try
-	Test/run $<
+try: $(objs)
+	gcc -o $@ $(objs) $(ldflags) 
 
 test: $(prog)
 	Test/run $<

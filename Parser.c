@@ -46,12 +46,26 @@ static T_words p_words() {
 }
 
 static T_command p_command() {
-  T_words words=0;
-  words=p_words();
+  T_words words=p_words();
   if (!words)
     return 0;
+  
   T_command command=new_command();
   command->words=words;
+  command->in_file=0;
+  command->out_file=0;
+
+  /* Parse I/O redirections */
+  while (cmp("<") || cmp(">")) {
+    if (eat("<")) {
+      command->in_file = strdup(curr());
+      eat(curr());
+    } else if (eat(">")) {
+      command->out_file = strdup(curr());
+      eat(curr());
+    }
+  }
+
   return command;
 }
 
@@ -92,6 +106,7 @@ extern Tree parseTree(char *s) {
   return tree;
 }
 
+/* Forward declarations for freeing */
 static void f_word(T_word t);
 static void f_words(T_words t);
 static void f_command(T_command t);
@@ -118,6 +133,11 @@ static void f_command(T_command t) {
   if (!t)
     return;
   f_words(t->words);
+  
+  /* Free memory allocated for I/O redirection */
+  if (t->in_file) free(t->in_file);
+  if (t->out_file) free(t->out_file);
+  
   free(t);
 }
 
