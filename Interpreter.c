@@ -1,3 +1,14 @@
+/**
+ * File: Interpreter.c
+ * Description: Traverses the AST and queues commands for execution.
+ * * CS 452 Implementation Details:
+ * - Passes I/O redirection target files from the Tree nodes down into 
+ * the Command creation module.
+ * - Inspects Sequence operators to determine execution mode. If the 
+ * operator is '&', the pipeline is flagged to run in the background (fg=0). 
+ * If ';', it runs in the foreground (fg=1).
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

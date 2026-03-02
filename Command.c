@@ -1,3 +1,15 @@
+/**
+ * File: Command.c
+ * Description: Handles the execution of individual commands and built-ins.
+ * * CS 452 Implementation Details:
+ * - Implements built-in commands: pwd, cd, history, and exit.
+ * - The 'exit' command performs a blocking wait() to ensure all background
+ * jobs finish before the shell terminates.
+ * - Manages child process creation via fork() and execvp().
+ * - Handles file-based I/O redirection by parsing `in_file` (<) and 
+ * `out_file` (>) and using dup2() to map them to stdin (0) and stdout (1).
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

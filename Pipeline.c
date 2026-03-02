@@ -1,3 +1,15 @@
+/**
+ * File: Pipeline.c
+ * Description: Manages the execution of piped commands (e.g., cmd1 | cmd2).
+ * * CS 452 Implementation Details:
+ * - Creates standard pipes using pipe() and dynamically links the stdout 
+ * of one command to the stdin of the next.
+ * - Differentiates between foreground and background pipelines based on 
+ * the 'fg' flag passed from the interpreter.
+ * - Uses waitpid() to block and wait for all child processes in the 
+ * pipeline *only* if it is a foreground job.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>

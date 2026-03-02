@@ -1,3 +1,15 @@
+/**
+ * File: Parser.c
+ * Description: A recursive-descent parser that converts tokens into an AST.
+ * * CS 452 Implementation Details:
+ * - Modified p_words() to stop consuming tokens when it encounters 
+ * I/O redirection operators ('<' and '>').
+ * - Updated p_command() to parse redirection operators and safely store 
+ * the target filenames in the AST node (t->in_file, t->out_file).
+ * - Added comprehensive memory freeing in f_command() to prevent leaks 
+ * from dynamically allocated redirection filenames.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>

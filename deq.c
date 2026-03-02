@@ -1,3 +1,14 @@
+/**
+ * File: deq.c
+ * Description: A custom double-ended queue implementation.
+ * * CS 452 Implementation Details:
+ * - Completely replaces the binary-only libdeq.so.
+ * - Implemented as a symmetric doubly-linked list.
+ * - Uses an array of pointers (np[Ends]) to allow generic inward/outward 
+ * traversals, ensuring symmetric operations (e.g., head_put vs tail_put) 
+ * share the same core logic without redundant code.
+ */
+
 #define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>

@@ -1,3 +1,14 @@
+/**
+ * File: Shell.c
+ * Description: The main entry point for the custom Unix shell.
+ * * CS 452 Implementation Details:
+ * - Implements the main REPL (Read, Parse, Interpret) loop.
+ * - Handles zombie process prevention by calling waitpid(..., WNOHANG) 
+ * before each prompt to reap completed background jobs.
+ * - Ensures zero memory leaks by cleanly freeing the job list and terminal 
+ * state upon exiting.
+ */
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
