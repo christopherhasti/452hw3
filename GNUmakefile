@@ -1,4 +1,4 @@
-prog=shell
+prog=try
 ldflags:=-lreadline -lhistory -lncurses
 
 # Update objects to compile your own deq.c

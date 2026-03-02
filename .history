@@ -1,0 +1,6 @@
+pwd
+ls -l | wc
+echo hello > out.txt
+exit
+exit
+exit
