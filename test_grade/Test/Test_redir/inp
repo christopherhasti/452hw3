@@ -1,0 +1,1 @@
+echo apples > temp.txt ; cat < temp.txt
